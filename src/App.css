@@ -1,38 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 .App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+p, h1{
+  margin: 0px;
+}
+.wrapper{
+  position: relative;
+  width: fit-content;
+}
+
+.BackgroundShade{
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  background: linear-gradient( 90deg, #08c0d0, #0057FF, #FB184E, #fa03e6);
+  background-size: 400% 100%;
+  filter: blur(2.5rem);
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  border-radius: 30px;
+  animation: backgroundShadow 24s ease-in-out infinite alternate;
+}
+@keyframes backgroundShadow {
+  50%{
+    background-position: 140% 100%;
+  }
+}
+.Calculator{
+  padding: 3rem;
+  border-radius: 30px;
+  background: white;
+}
+.Calculator > h1{
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Calculator, .inputs{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1.5rem;
+}
+.inputs > input{
+  border: 2px solid #2B2B2B;
+  padding: 5px 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+input::placeholder{
+  color: #2B2B2B;
+}
+.buttons,
+.buttons > button{
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  gap: 1em;
+}
+.buttons > button{
   color: white;
+  background-color: #2B2B2B;
+  padding: 10px;
+}
+button{
+  border: none;
+  scale: 1.1;
+  transition: 0.05s ease;
+}
+button:hover{
+  cursor: pointer;
+}
+button:active{
+  scale: 1;
 }
 
-.App-link {
-  color: #61dafb;
+.inputs > input,
+.buttons > button{
+  font-size: 24px;
+  font-weight: 700;
+}
+.error, .result{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  color: #2B2B2B;
+  font-size: 20px;
+  font-weight: 700;
+}
+.error > .status{
+  color: #FB184E;
+}
+.result > .status{
+  color: #0057FF;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
