@@ -11,27 +11,29 @@ function Calculator(){
         result - this useState is to store and display the resultant value of the calculation
      */
 
-    const [first, setFirst] = useState(0); 
-    const [second, setSecond] = useState(0);
-    const [status, setStatus] = useState('');
+    const [first, setFirst] = useState(''); 
+    const [second, setSecond] = useState('');
+    const [error, setError] = useState('');
     const [result, setResult] = useState('');
 
     function handleClick(op){
         // This block handles the empty input field case
         if(!first || !second){
-            if(!first) setStatus('Num1 cannot be empty');
-            else setStatus('Num2 cannot be empty');
+            if(!first) setError('Num1 cannot be empty');
+            else setError('Num2 cannot be empty');
             return;
         }
 
-        setStatus('');
+        setError('');
 
         const num1 = parseFloat(first);
         const num2 = parseFloat(second);
-
+        
         // This if block wil be triggered if any of the 2 inputs are not a number
-        if(!num1 || !num2){
-            setStatus("Invalid input");
+        if(isNaN(num1) || isNaN(num2)){
+            setError("Invalid input");
+            setFirst('');
+            setSecond('');
             return;
         }
         
@@ -53,12 +55,12 @@ function Calculator(){
 
             {/* BackgroundShade element is there to give a background shadow effect to the main element, That is the Calculator element. */}
             <div className="BackgroundShade"></div>
-            
+
             <div className="Calculator">
                 <h1>React Calculator</h1>
                 <div className="inputs">
-                    <input type="text" placeholder="Num 1" id="num1" onChange = {handleChange}/>
-                    <input type="text" placeholder="Num 2" id="num2" onChange = {handleChange}/>
+                    <input type="text" value={first} placeholder="Num 1" id="num1" onChange = {handleChange}/>
+                    <input type="text" value={second} placeholder="Num 2" id="num2" onChange = {handleChange}/>
                 </div>
                 <div className="buttons">
                     <button id="add" onClick={()=>handleClick('+')}><BsPlus /></button>
@@ -68,15 +70,15 @@ function Calculator(){
                 </div>
                 
                 {/* This section will be triggered when theres an error */}
-                {status && 
+                {error && 
                     <div className="error">
                         <p className="status">Error!</p>
-                        <p className="reason">{status}</p>
+                        <p className="reason">{error}</p>
                     </div>
                 }
 
                 {/* This section will be triggered when there's no error and the result is not empty */}
-                {result !== '' && !status && 
+                {result !== '' && !error && 
                     <div className="result">
                         <p className="status">Success!</p>
                         <p className="ans">Result- {result}</p>

@@ -51,6 +51,7 @@ p, h1{
   border: 2px solid #2B2B2B;
   padding: 5px 10px;
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
 input::placeholder{
   color: #2B2B2B;
